@@ -9,6 +9,7 @@
  */
 
 define('TAROT_PLUG_DIR', plugin_dir_url(__FILE__));
+define('TAROT_DB_NAME', $wpdb->prefix . 'wa_tarot_cards');
 require_once plugin_dir_path(__FILE__) . 'functions/ctWA-functions.php';
 register_activation_hook(__FILE__, 'add_DB');
 
@@ -20,9 +21,8 @@ function add_DB()
     global $wpdb;
     $charset_collate = $wpdb->get_charset_collate();
 
-    $cards_table_name = $wpdb->prefix . 'wa_tarot_cards';
 
-    $commissions_sql = "CREATE TABLE IF NOT EXISTS $cards_table_name (
+    $commissions_sql = "CREATE TABLE IF NOT EXISTS TAROT_DB_NAME (
     id int(255) NOT NULL AUTO_INCREMENT,
     nom varchar(255) NOT NULL,
     img varchar(255) NOT NULL,
