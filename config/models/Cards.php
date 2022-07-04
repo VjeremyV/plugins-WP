@@ -52,29 +52,7 @@ class Cards
         return $query;
     }
 
-    /**
-     * retourne une carte
-     */
-    public function read_one_card()
-    {
-        $sql = "SELECT * FROM " . $this->table . "WHERE id=:id";
-
-        // On prépare la requête
-        $query = $this->connexion->prepare($sql);
-
-
-        // On exécute la requête
-        $query->execute(['id' => $this->id]);
-
-        // on récupère la ligne
-        $row = $query->fetch(PDO::FETCH_ASSOC);
-
-        // On hydrate l'objet
-        $this->nom = $row['nom'];
-        $this->img = $row['img'];
-    }
-
-    /**
+      /**
      * modifier une carte
      */
     public function update_card()

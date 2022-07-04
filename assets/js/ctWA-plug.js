@@ -6,18 +6,22 @@ wp.blocks.registerBlockType("wa/tarot-cartes", {
   category: "widgets",
   attributes: {
     content: {
-      type: "string",
+      type: "number",
     },
   },
   edit: function (props) {
-    function updateContent(e){
-        props.setAttributes({content: e.target.value})
-    };
+    function updateContent(e) {
+      props.setAttributes({ content: parseInt(e.target.value) });
+    }
 
     return wp.element.createElement(
       "div",
       null,
-      /*#__PURE__*/ wp.element.createElement("h3", null, "Pr\xE9dictions tarot"),
+      /*#__PURE__*/ wp.element.createElement(
+        "h3",
+        null,
+        "Pr\xE9dictions tarot"
+      ),
       /*#__PURE__*/ wp.element.createElement(
         "label",
         {
@@ -34,7 +38,13 @@ wp.blocks.registerBlockType("wa/tarot-cartes", {
     );
   },
 
-  save: function (props) {
-    return null;
+  save: function () {
+    // fetch("https://api.example.com/items")
+
+    return wp.element.createElement(
+      "script", {
+        src: document.location.origin + "/wp-content/plugins/cartes-tarot-WA/assets/js/ctWA-front.js"
+      }
+    );
   },
 });

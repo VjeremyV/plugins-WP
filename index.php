@@ -22,7 +22,7 @@ function add_DB()
     $charset_collate = $wpdb->get_charset_collate();
 
 
-    $commissions_sql = "CREATE TABLE IF NOT EXISTS TAROT_DB_NAME (
+    $commissions_sql = "CREATE TABLE IF NOT EXISTS ". TAROT_DB_NAME." (
     id int(255) NOT NULL AUTO_INCREMENT,
     nom varchar(255) NOT NULL,
     img varchar(255) NOT NULL,

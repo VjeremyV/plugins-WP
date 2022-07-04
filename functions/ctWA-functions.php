@@ -19,7 +19,9 @@ function ctWA_addAdminLink(){
         wp_enqueue_script('ctWA-tarot-js', trailingslashit(TAROT_PLUG_DIR).'assets/js/ctWA-plug.js',
         array('wp-blocks', 'wp-i18n', 'wp-editor')
         , true);
+        wp_enqueue_style('ctWA-tarot-css', trailingslashit(TAROT_PLUG_DIR).'assets/css/ctWA-style.css' );
     }
+
     
     add_action( 'admin_menu', 'ctWA_addAdminLink' );
     add_action( 'enqueue_block_editor_assets', 'ctWA_addJsEditor');

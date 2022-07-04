@@ -3,9 +3,9 @@
 class Database{
     // Propriétés de la base de données
     private $host = "localhost";
-    private $db_name = "api_rest";
-    private $username = "root";
-    private $password = "";
+    private $db_name = 'wordpress';
+    private $username = "wordpress";
+    private $password = "wordpress";
     public $connexion;
 
     // getter pour la connexion
