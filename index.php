@@ -7,29 +7,11 @@
     Author URI:       https://github.com/VjeremyV
 
  */
+require_once plugin_dir_path(__FILE__) . 'functions/ctWA-functions.php';
 
 define('TAROT_PLUG_DIR', plugin_dir_url(__FILE__));
-define('TAROT_DB_NAME', $wpdb->prefix . 'wa_tarot_cards');
-require_once plugin_dir_path(__FILE__) . 'functions/ctWA-functions.php';
 register_activation_hook(__FILE__, 'add_DB');
+add_action( 'admin_menu', 'ctWA_addAdminLink' );
+add_action( 'enqueue_block_editor_assets', 'ctWA_addJsEditor');
+add_action('rest_api_init', 'ctWA_addRouteJson');
 
-
-function add_DB()
-{    /**
-     * Si inexistante, on créée la table SQL "commissions" après l'activation du thème
-     */
-    global $wpdb;
-    $charset_collate = $wpdb->get_charset_collate();
-
-
-    $commissions_sql = "CREATE TABLE IF NOT EXISTS ". TAROT_DB_NAME." (
-    id int(255) NOT NULL AUTO_INCREMENT,
-    nom varchar(255) NOT NULL,
-    img varchar(255) NOT NULL,
-    PRIMARY KEY  (id)
-) $charset_collate;";
-
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
-    dbDelta($commissions_sql);
-}
