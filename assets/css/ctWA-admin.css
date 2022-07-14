@@ -1,0 +1,19 @@
+.ctWA-containers{
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    max-width: 500px;
+}
+.ctWA-forms{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.ctWA-forms textarea{
+    resize: none;
+    min-height: 304px;
+}

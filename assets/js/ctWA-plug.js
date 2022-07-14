@@ -20,31 +20,29 @@ wp.blocks.registerBlockType("wa/tarot-cartes", {
       /*#__PURE__*/ wp.element.createElement(
         "h3",
         null,
-        "Pr\xE9dictions tarot"
+        "Prédictions tarot"
       ),
-      /*#__PURE__*/ wp.element.createElement(
-        "label",
-        {
-          htmlFor: "wa-numberCard",
-        },
-        "Choisissez le nombre de cartes \xE0 afficher"
-      ),
-      /*#__PURE__*/ wp.element.createElement("input", {
-        type: "number",
-        id: "wa-numberCard",
-        onChange: updateContent,
-        value: props.attributes.content,
-      })
+      // /*#__PURE__*/ wp.element.createElement(
+      //   "label",
+      //   {
+      //     htmlFor: "wa-numberCard",
+      //   },
+      //   "Choisissez le nombre de cartes \xE0 afficher"
+      // ),
+      // /*#__PURE__*/ wp.element.createElement("input", {
+      //   type: "number",
+      //   id: "wa-numberCard",
+      //   onChange: updateContent,
+      //   value: props.attributes.content,
+      // })
     );
   },
 
   save: function () {
     // fetch("https://api.example.com/items")
 
-    return wp.element.createElement(
-      "script", {
-        src: document.location.origin + "/wp-content/plugins/cartes-tarot-WA/assets/js/ctWA-front.js"
-      }
-    );
+    return wp.element.createElement("div", {
+      class: "tarot-card-container"
+    });
   },
 });
