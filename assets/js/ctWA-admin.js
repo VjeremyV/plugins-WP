@@ -3,6 +3,36 @@ let newCardDescription = document.getElementById('newCardDescription');
 let newCardImg = document.getElementById('newCardImg');
 let message = document.querySelector('.flash-messages');
 const submit = document.getElementById('createButton');
+let buttons = document.querySelectorAll('.boutons');
+const createContainer= document.getElementById('create-container');
+const updateContainer= document.getElementById('update-container');
+const deleteContainer= document.getElementById('delete-container');
+
+buttons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    if (btn.checked) {
+
+      switch (btn.getAttribute("id")) {
+        case "create":
+          createContainer.style.display ='block';
+          updateContainer.style.display ='none';
+          deleteContainer.style.display ='none';
+          break;
+        case "update":
+          createContainer.style.display ='none';
+          updateContainer.style.display ='block';
+          deleteContainer.style.display ='none';
+          break;
+
+        case "delete":
+          createContainer.style.display ='none';
+          updateContainer.style.display ='none';
+          deleteContainer.style.display ='block';
+          break;
+      }
+        }
+  })
+})
 
 submit.addEventListener('click', (e) => {
   e.preventDefault()

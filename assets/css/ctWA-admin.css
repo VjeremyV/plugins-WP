@@ -17,3 +17,7 @@ align-items: center;
     resize: none;
     min-height: 304px;
 }
+
+#delete-container, #update-container, #reate-container{
+    display: none;
+}
