@@ -15,7 +15,7 @@ wp_enqueue_script('ctWA-tarot-admin-js', trailingslashit(TAROT_PLUG_DIR).'assets
   <div class='flash-messages'></div>
   <div id='create-container' class='ctWA-containers'>
     <h2>Créer d'une carte</h2>
-    <form id='create-form' class="form-group ctWA-forms" >
+    <form id='create-form' class="form-group ctWA-forms"  method="post">
       <label for="newCardNom" class="form-label">Nom de la carte</label>
       <input class="form-control" type="text" name="newCardNom" id="newCardNom">
     
