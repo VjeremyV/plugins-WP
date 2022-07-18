@@ -52,6 +52,7 @@ function ctWA_addAdminLink(){
     nom varchar(255) NOT NULL,
     description varchar(255) NULL,
     img varchar(255) NOT NULL,
+    imgDB varchar(255) NOT NULL,
     PRIMARY KEY  (id)
 ) $charset_collate;";
 
@@ -80,14 +81,17 @@ function write_DB(WP_REST_Request $request){
     $nom = htmlentities($params['nom']);
     $description = htmlentities($params['description']);
     $image = htmlentities($params['img']);
+    $imageDb = htmlentities($params['imgDB']);
+
     if($wpdb->query(
         $wpdb->prepare(
         "INSERT INTO ". TAROT_DB_NAME."
-        (nom, description, img)
-        VALUES ( %s, %s, %s )",
+        (nom, description, img, imgDB)
+        VALUES ( %s, %s, %s, %s )",
               $nom,
               $description,
               $image,
+              $imageDb
            
         )
         )){
@@ -145,6 +149,17 @@ register_rest_route('wa_tarot/v1', '/write', [
             }
         ),
         'img'=>array(
+            'type'=>'string',
+            'required'=> true,
+            'validate_callback'=>function($param){
+                if(empty($param)){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        ),
+        'imgDB'=>array(
             'type'=>'string',
             'required'=> true,
             'validate_callback'=>function($param){
