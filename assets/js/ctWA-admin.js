@@ -1,7 +1,7 @@
 let newCardName = document.getElementById("newCardNom");
 let newCardDescription = document.getElementById("newCardDescription");
 let newCardImg = document.getElementById("newCardImg");
-let newCardImgDB = 'z-';
+let newCardImgDB = "z-";
 let message = document.querySelector(".flash-messages");
 const create = document.getElementById("createButton");
 let buttons = document.querySelectorAll(".boutons");
@@ -39,7 +39,7 @@ buttons.forEach((btn) => {
  * @param {*} img
  * @returns
  */
- async function uploadFiles(img) {
+async function updateDB(img) {
   let formData = new FormData();
   formData.append("img", img.files[0]);
   fetch(
@@ -52,36 +52,41 @@ buttons.forEach((btn) => {
   )
     .then((res) => res.text())
     .then((data) => {
-
+      if (data !== "Failure") {
+        let donnees = {
+          nom: newCardName.value,
+          description: newCardDescription.value,
+          img: newCardImg.files[0].name,
+          imgDB: data,
+        };
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(donnees),
+        };
+        fetch(
+          document.location.origin + "/wp-json/wa_tarot/v1/write",
+          options
+        ).then((res) => {
+          if (res.status === 200) {
+            message.innerHTML =
+              '<p class="alert alert-success">La carte a bien été ajoutée</p>';
+          } else {
+            message.innerHTML =
+              '<p class = "alert alert-danger" >Une erreur est survenu lors de l\'ajout de la carte </p>';
+          }
+        });
+      } else {
+        message.innerHTML =
+          "<p class = \"alert alert-danger\" >Une erreur est survenu lors de l'upload de l'image </p>";
+      }
       return data;
     });
 }
 
-create.addEventListener("click",  function (e) {
+create.addEventListener("click", function (e) {
   e.preventDefault();
-  uploadFiles(newCardImg).then((res) => console.log(res));
-  
-  // let data = {
-  //   nom: newCardName.value,
-  //   description: newCardDescription.value,
-  //   img: newCardImg.files[0].name,
-  //   imgDB: test
-  // };
-  // const options = {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify(data)
-  // }
-  // fetch(document.location.origin + '/wp-json/wa_tarot/v1/write', options)
-  // .then((res) => {
-  //   if(res.status === 200){
-  //           message.innerHTML = '<p class="alert alert-success">La carte a bien été ajoutée</p>';
-  //   } else {
-  //       message.innerHTML = '<p class = "alert alert-danger" >Une erreur est survenu lors de l\'ajout de la carte </p>';
-  //   };
-  // });
-
-
+  updateDB(newCardImg);
 });

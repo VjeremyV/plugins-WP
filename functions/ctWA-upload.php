@@ -1,6 +1,6 @@
 <?php
 
-$extensions= ['jpg', 'jpeg', 'png', 'wepb'];
+$extensions= ['jpg', 'jpeg', 'png', 'wepb', 'PNG'];
 /* Get the name of the uploaded file */
 $filename = $_FILES['img']['name'];
 $info= new SplFileInfo($filename);
