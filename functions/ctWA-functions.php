@@ -1,6 +1,7 @@
 <?php
 define('TAROT_DB_NAME', $wpdb->prefix . 'wa_tarot_cards');
 
+
 /**
  * ajoute mon menu au panneau d'admin de WP
  *
@@ -75,6 +76,12 @@ function read_DB(){
     return $data;
 }
 
+/**
+ * créer une carte en bdd
+ *
+ * @param WP_REST_Request $request
+ * @return void
+ */
 function write_DB(WP_REST_Request $request){
     $params= $request->get_params();
     global $wpdb;
@@ -103,8 +110,36 @@ function write_DB(WP_REST_Request $request){
         // echo json_encode(array('status'=> 1, 'params' => $params));
     
 }
+
 /**
- * ajoute une route perso à l'API rest de WP
+ * met à jour une carte en bdd
+ *
+ * @param WP_REST_Request $request
+ * @return void
+ */
+function update_DB(WP_REST_Request $request){
+    $params= $request->get_params();
+    echo json_encode($params);
+    global $wpdb;
+    $nom = htmlentities($params['nom']);
+    $description = htmlentities($params['description']);
+    $image = htmlentities($params['img']);
+    $imageDb = htmlentities($params['imgDB']);
+    if($wpdb->update(TAROT_DB_NAME, [
+        'nom'=>$nom,
+        'description' => $description,
+        'img' => $image,
+        'imgDB' => $imageDb]
+    , ['id' => $params['id']])      
+        ){
+         echo 'la carte a bien été mise à jour';   
+        } else {
+            echo 'la carte n\'a pas pu être mise à jour';
+        }
+}
+
+/**
+ * ajoute une route perso à l'API rest de WP pour la lecture des données
  *
  * @return void
  */
@@ -116,8 +151,10 @@ register_rest_route('wa_tarot/v1', '/read', [
     }
 ]);
 }
+
+
 /**
- * ajoute une route perso à l'API rest de WP
+ * ajoute une route perso à l'API rest de WP pour l'ecriture de données
  *
  * @return void
  */
@@ -174,6 +211,64 @@ register_rest_route('wa_tarot/v1', '/write', [
 ]);
 }
 
+/**
+ * ajoute une route perso à l'API rest de WP pour la mise à jour de données
+ *
+ * @return void
+ */
+function ctWA_addRouteJsonUpdate(){
+    register_rest_route('wa_tarot/v1', '/update/(?P<id>[\d]+)', array(
+        'methods' => WP_REST_Server::EDITABLE,
+        'callback' => 'update_DB',
+        'args'=> array(
+            'nom'=>array(
+                'type'=>'string',
+                'required'=> true,
+                'validate_callback'=>function($param){
+                    if(empty($param)){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            ),
+            'description'=>array(
+                'type'=>'string',
+                'required'=> true,
+                'validate_callback'=>function($param){
+                    if(empty($param)){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            ),
+            'img'=>array(
+                'type'=>'string',
+                'required'=> true,
+                'validate_callback'=>function($param){
+                    if(empty($param)){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            ),
+            'imgDB'=>array(
+                'type'=>'string',
+                'required'=> true,
+                'validate_callback'=>function($param){
+                    if(empty($param)){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            )
+        )
+    ));
+
+}
 
 
 
