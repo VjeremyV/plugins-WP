@@ -1,7 +1,7 @@
 .ctWA-containers{
     margin: auto;
-    border: 1px solid black;
-    border-radius: 5px;
+    /* border: 1px solid black;
+    border-radius: 5px; */
     padding: 20px;
     text-align: center;
     max-width: 500px;
@@ -20,4 +20,9 @@ align-items: center;
 
 #delete-container, #update-container, #reate-container{
     display: none;
+}
+
+.flash-messages{
+    max-width: 200px;
+    margin: auto;
 }

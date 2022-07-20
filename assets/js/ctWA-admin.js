@@ -1,13 +1,19 @@
+/////////////////////////////////éléments du form création de carte ///////////////////////////
 let newCardName = document.getElementById("newCardNom");
 let newCardDescription = document.getElementById("newCardDescription");
 let newCardImg = document.getElementById("newCardImg");
-let newCardImgDB = "z-";
-let message = document.querySelector(".flash-messages");
 const create = document.getElementById("createButton");
-let buttons = document.querySelectorAll(".boutons");
 const createContainer = document.getElementById("create-container");
+//////////////////////////////////éléments du form update de carte /////////////////////
+let upCardNom = document.getElementById('upCardNom');
 const updateContainer = document.getElementById("update-container");
+////////////////////////////////éléments du form delete
 const deleteContainer = document.getElementById("delete-container");
+
+////////////////////////////////éléments généraux////////////////////////////////////////
+let cardsSelectDelete = document.getElementById('cardsSelectDelete');
+let buttons = document.querySelectorAll(".boutons");//boutons radios pour switch de formulaires
+let message = document.querySelector(".flash-messages");
 
 buttons.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -35,18 +41,17 @@ buttons.forEach((btn) => {
 });
 
 /**
- *
+ *permet l'update de la bdd pour une création ou une mise à jour
  * @param {*} img
  * @returns
  */
-async function updateDB(img) {
+async function updateDB(img, route, methode) {
   let formData = new FormData();
   formData.append("img", img.files[0]);
   fetch(
-    document.location.origin +
-      "/wp-content/plugins/cartes-tarot-WA/functions/ctWA-upload.php",
+    route,
     {
-      method: "POST",
+      method: methode,
       body: formData,
     }
   )
@@ -86,7 +91,9 @@ async function updateDB(img) {
     });
 }
 
+
+
 create.addEventListener("click", function (e) {
   e.preventDefault();
-  updateDB(newCardImg);
+  updateDB(newCardImg, document.location.origin + "/wp-content/plugins/cartes-tarot-WA/functions/ctWA-upload.php", "POST");
 });

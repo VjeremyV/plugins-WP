@@ -29,10 +29,9 @@ wp_enqueue_script(
     </ul>
 
   </div>
-  <div class='flash-messages'></div>
   <div id='create-container' class='ctWA-containers'>
     <h2>Créer d'une carte</h2>
-    <form id='create-form' class="form-group ctWA-forms"  method="post">
+    <form id='create-form' class="form-group ctWA-forms" method="post">
 
       <label for="newCardNom" class="form-label">Nom de la carte</label>
       <input class="form-control" type="text" name="newCardNom" id="newCardNom">
@@ -50,34 +49,49 @@ wp_enqueue_script(
 
   <div id='update-container' class='ctWA-containers'>
     <h2>Modifier d'une carte</h2>
-    <form id='up-form' class="form-group ctWA-forms">
-      <label for="upCardNom" class="form-label">Nom de la carte</label>
-      <input class="form-control" type="text" name="upCardNom" id="upCardNom">
+    <div>
+      <form id='up-form' class="form-group ctWA-forms">
+      <select name="cardsSelectUpdate" id="cardsSelectUpdate">
+        <option value="">--Choisissez la carte--</option>
+      </select>
 
-      <label class="form-label" for="upCardDescription">Description de la carte</label>
-      <textarea class="form-control" name="upCardDescription" id="upCardDescription"></textarea>
+        <label for="upCardNom" class="form-label">Nom de la carte</label>
+        <input class="form-control" type="text" name="upCardNom" id="upCardNom">
 
-      <label class="form-label" for="upCardImg">Image de la carte</label>
-      <input class="form-control" type="file" name="upCardImg" id="upCardImg">
+        <label class="form-label" for="upCardDescription">Description de la carte</label>
+        <textarea class="form-control" name="upCardDescription" id="upCardDescription"></textarea>
 
-      <button id='updateButton' type="button" class="btn btn-primary my-3">mettre à jour</button>
-    </form>
+        <label class="form-label" for="upCardImg">Image de la carte</label>
+        <input class="form-control" type="file" name="upCardImg" id="upCardImg">
+
+        <button id='updateButton' type="button" class="btn btn-primary my-3">mettre à jour</button>
+      </form>
+    </div>
+    <hr />
+    <div class="d-flex justify-content-center align-items-center">
+      <h3>Aperçu</h3>
+      <div classs='cardTitleWaUpdate'></div>
+      <div class="cardImgWAUpdate"></div>
+      <div class='cardDescriptionWAUpdate'></div>
+    </div>
   </div>
 
 
   <div id='delete-container' class='ctWA-containers'>
     <h2>supprimer une carte</h2>
     <form id='delete-form' class="form-group ctWA-forms">
-      <label for="deleteCardNom" class="form-label">Nom de la carte</label>
-      <input class="form-control" type="text" name="deleteCardNom" id="deleteCardNom">
-
-      <label class="form-label" for="deleteCardDescription">Description de la carte</label>
-      <textarea class="form-control" name="deleteCardDescription" id="deleteCardDescription"></textarea>
-
-      <label class="form-label" for="deleteCardImg">Image de la carte</label>
-      <input class="form-control" type="file" name="deleteCardImg" id="deleteCardImg">
+      <select name="cardsSelectDelete" id="cardsSelectDelete">
+        <option value="">--Choisissez la carte--</option>
+      </select>
 
       <button id='deleteButton' type="button" class="btn btn-primary my-3">supprimer</button>
     </form>
+    <div class="d-flex justify-content-center align-items-center">
+      <div classs='cardTitleWaDelete'></div>
+      <div class="cardImgWADelete"></div>
+      <div class='cardDescriptionWADelete'></div>
+    </div>
   </div>
 </div>
+
+<div class='flash-messages text-center'></div>
