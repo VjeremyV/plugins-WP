@@ -16,5 +16,6 @@ add_action( 'enqueue_block_editor_assets', 'ctWA_addJsEditor');
 add_action('rest_api_init', 'ctWA_addRouteJsonRead');
 add_action('rest_api_init', 'ctWA_addRouteJsonWrite');
 add_action('rest_api_init', 'ctWA_addRouteJsonUpdate');
+add_action('rest_api_init', 'ctWA_addRouteJsonDelete');
 add_action('wp_enqueue_scripts', 'ctWA_addFront');
 

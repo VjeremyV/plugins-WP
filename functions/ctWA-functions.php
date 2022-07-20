@@ -119,7 +119,6 @@ function write_DB(WP_REST_Request $request){
  */
 function update_DB(WP_REST_Request $request){
     $params= $request->get_params();
-    echo json_encode($params);
     global $wpdb;
     $nom = htmlentities($params['nom']);
     $description = htmlentities($params['description']);
@@ -138,6 +137,16 @@ function update_DB(WP_REST_Request $request){
         }
 }
 
+
+function delete_DB(WP_REST_Request $request){
+    $params= $request->get_params();
+    global $wpdb;
+    if($wpdb->delete(TAROT_DB_NAME, ['id' => $params['id']], ['%d'])){
+        echo 'la carte a bien été supprimée';   
+    } else {
+        echo 'erreur : la carte n\'a  pas pu être supprimée'; 
+    }
+}
 /**
  * ajoute une route perso à l'API rest de WP pour la lecture des données
  *
@@ -151,6 +160,19 @@ register_rest_route('wa_tarot/v1', '/read', [
     }
 ]);
 }
+
+/**
+ * ajoute une route perso à l'API rest de WP pour la suppression d'une carte
+ *
+ * @return void
+ */
+function ctWA_addRouteJsonDelete(){
+    register_rest_route('wa_tarot/v1', '/delete/(?P<id>[\d]+)', [
+        'methods' => WP_REST_Server::DELETABLE, 
+        'callback' => 'delete_DB'
+    ]);
+}
+
 
 
 /**
