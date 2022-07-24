@@ -49,11 +49,11 @@ wp_enqueue_script(
 
   <div id='update-container' class='ctWA-containers'>
     <h2>Modifier d'une carte</h2>
-    <div>
+    <div class="d-flex justify-content-around align-items-center">
       <form id='up-form' class="form-group ctWA-forms">
-      <select name="cardsSelectUpdate" id="cardsSelectUpdate">
-        <option value="">--Choisissez la carte--</option>
-      </select>
+        <select name="cardsSelectUpdate" id="cardsSelectUpdate">
+          <option value="">--En attente des données--</option>
+        </select>
 
         <label for="upCardNom" class="form-label">Nom de la carte</label>
         <input class="form-control" type="text" name="upCardNom" id="upCardNom">
@@ -66,14 +66,9 @@ wp_enqueue_script(
 
         <button id='updateButton' type="button" class="btn btn-primary my-3">mettre à jour</button>
       </form>
-    </div>
-    <hr />
-    <div class="d-flex justify-content-center align-items-center">
-      <h3>Aperçu</h3>
-      <div classs='cardTitleWaUpdate'></div>
       <div class="cardImgWAUpdate"></div>
-      <div class='cardDescriptionWAUpdate'></div>
     </div>
+    
   </div>
 
 
@@ -81,7 +76,7 @@ wp_enqueue_script(
     <h2>supprimer une carte</h2>
     <form id='delete-form' class="form-group ctWA-forms">
       <select name="cardsSelectDelete" id="cardsSelectDelete">
-        <option value="">--Choisissez la carte--</option>
+        <option value="">--En attente des données--</option>
       </select>
 
       <button id='deleteButton' type="button" class="btn btn-primary my-3">supprimer</button>

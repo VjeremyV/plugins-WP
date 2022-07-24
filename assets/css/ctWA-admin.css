@@ -4,7 +4,7 @@
     border-radius: 5px; */
     padding: 20px;
     text-align: center;
-    max-width: 500px;
+    max-width: 800px;
 }
 .ctWA-forms{
 display: flex;
@@ -25,4 +25,8 @@ align-items: center;
 .flash-messages{
     max-width: 200px;
     margin: auto;
+}
+.imgCardWA{
+    width:244px;
+    height: 444px;;
 }
