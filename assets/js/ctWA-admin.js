@@ -12,6 +12,7 @@
   const upCardDescription = document.getElementById("upCardDescription");
   const cardImgWAUpdate = document.querySelector('.cardImgWAUpdate');
   const update = document.getElementById('updateButton');
+  const upCardImg = document.getElementById('upCardImg');
   ////////////////////////////////éléments du form delete
   const deleteContainer = document.getElementById("delete-container");
 
@@ -22,52 +23,68 @@
   let inputsOptions;
 
   /**
-   *permet l'update de la bdd pour une création ou une mise à jour
+   *permet l'ajout d'une carte en bdd
    * @param {*} img
    * @returns
    */
-  async function updateDB(cardName, cardDescription, img, route, methode) {
+  async function addCard(cardName, cardDescription, img, route, methode) {
     let formData = new FormData();
-    formData.append("img", img.files[0]);
-    fetch(route, {
-      method: methode,
-      body: formData,
-    })
-      .then((res) => res.text())
-      .then((data) => {
-        if (data !== "Failure") {
-          let donnees = {
-            nom: cardName.value,
-            description: cardDescription.value,
-            img: img.files[0].name,
-            imgDB: data,
-          };
-          const options = {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(donnees),
-          };
-          fetch(
-            document.location.origin + "/wp-json/wa_tarot/v1/write",
-            options
-          ).then((res) => {
-            if (res.status === 200) {
-              message.innerHTML = '<p class="alert alert-success">La carte a bien été ajoutée</p>';
-              loadOptionsInput()
-            } else {
-              message.innerHTML =
-                '<p class = "alert alert-danger" >Une erreur est survenu lors de l\'ajout de la carte </p>';
-            }
-          });
-        } else {
-          message.innerHTML =
-            "<p class = \"alert alert-danger\" >Une erreur est survenu lors de l'upload de l'image </p>";
-        }
-        return data;
-      });
+      formData.append("img", img.files[0]);
+      fetch(document.location.origin + "/wp-content/plugins/cartes-tarot-WA/functions/ctWA-upload.php", {
+        method: 'POST',
+        body: formData,
+      })
+        .then((res) => res.text())
+        .then((data) => {
+          if (data !== "Failure") {
+            addUpdadteCard(cardName, cardDescription, img, route, methode, data);
+          } else {
+            message.innerHTML =
+              "<p class = \"alert alert-danger\" >Une erreur est survenu lors de l'upload de l'image </p>";
+          }
+          return data;
+        });
   }
+
+
+
+  /**
+   * 
+   * @param {*} cardName 
+   * @param {*} cardDescription 
+   * @param {*} img 
+   * @param {*} route 
+   * @param {*} method 
+   * @param {*} imgData 
+   */
+  function addUpdadteCard(cardName, cardDescription, img, route, method, imgData){
+    let donnees = {
+      nom: cardName.value,
+      description: cardDescription.value,
+      img: img.files[0].name,
+      imgDB: imgData,
+    };
+    const options = {
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(donnees),
+    };
+    fetch(
+      route,
+      options
+    ).then((res) => {
+      if (res.status === 200) {
+        message.innerHTML = '<p class="alert alert-success">La carte a bien été ajoutée</p>';
+        loadOptionsInput()
+      } else {
+        message.innerHTML =
+          '<p class = "alert alert-danger" >Une erreur est survenu lors de l\'ajout de la carte </p>';
+      }
+    });
+  }
+
 
   /**
    * génère les liste d'input option relatives aux carte en bdd
@@ -135,19 +152,25 @@
 
   create.addEventListener("click", function (e) {
     e.preventDefault();
-    updateDB(
+    addCard(
       newCardName, 
       newCardDescription,
       newCardImg,
-      document.location.origin +
-        "/wp-content/plugins/cartes-tarot-WA/functions/ctWA-upload.php",
-      "POST"
+      document.location.origin + "/wp-json/wa_tarot/v1/write",
+      'POST'
     );
   });
 
   update.addEventListener('click', function(e) {
     e.preventDefault();
-
+    if(upCardImg.files[0]){
+      console.log(upCardNom.value);
+      console.log(upCardDescription.value);
+console.log(cardsSelectUpdate);
+      // addCard(upCardNom.value, upCardDescription.value, upCardImg, document.location.origin + "/wp-json/wa_tarot/v1/update/"+);
+    } else {
+      console.log('false');
+    }
 
   })
 
@@ -157,11 +180,12 @@
     inputsOptions.forEach((element) => {
       if (element.id === e.target.value){
         upCardNom.value = element.nom;
-        upCardDescription.value = element.description
+        upCardDescription.value = element.description;
         cardImgWAUpdate.innerHTML = `<img class='imgCardWA'src="${document.location.origin}/wp-content/plugins/cartes-tarot-WA/assets/uploads/${element.imgDB}">`
       }
     })
   });
 
   loadOptionsInput();
+
 })();
