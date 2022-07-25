@@ -81,10 +81,12 @@ wp_enqueue_script(
 
       <button id='deleteButton' type="button" class="btn btn-primary my-3">supprimer</button>
     </form>
-    <div class="d-flex justify-content-center align-items-center">
-      <div classs='cardTitleWaDelete'></div>
+    <div class="d-flex justify-content-around align-items-center">
+   <div class="d-flex flex-column justify-content-center align-items-center">
+       <div class='cardTitleWaDelete'></div>
+       <div class='cardDescriptionWADelete'></div>
+   </div>
       <div class="cardImgWADelete"></div>
-      <div class='cardDescriptionWADelete'></div>
     </div>
   </div>
 </div>

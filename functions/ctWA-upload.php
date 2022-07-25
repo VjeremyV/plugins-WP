@@ -17,7 +17,7 @@ if(in_array($fileExtension, $extensions)){
     $location = '../assets/uploads/' .$filename;
     
     /* Save the uploaded file to the local filesystem */
-    if ( move_uploaded_file($_FILES['img']['tmp_name'], '../assets/uploads/'.$date.$countFile.'.'.$fileExtension) ) { 
+    if (move_uploaded_file($_FILES['img']['tmp_name'], '../assets/uploads/'.$date.$countFile.'.'.$fileExtension) ) { 
       echo $date.$countFile.'.'.$fileExtension; 
     } else { 
       echo 'Failure'; 
