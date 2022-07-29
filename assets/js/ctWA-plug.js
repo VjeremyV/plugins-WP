@@ -22,19 +22,19 @@ wp.blocks.registerBlockType("wa/tarot-cartes", {
         null,
         "Prédictions tarot"
       ),
-      // /*#__PURE__*/ wp.element.createElement(
-      //   "label",
-      //   {
-      //     htmlFor: "wa-numberCard",
-      //   },
-      //   "Choisissez le nombre de cartes \xE0 afficher"
-      // ),
-      // /*#__PURE__*/ wp.element.createElement("input", {
-      //   type: "number",
-      //   id: "wa-numberCard",
-      //   onChange: updateContent,
-      //   value: props.attributes.content,
-      // })
+      /*#__PURE__*/ wp.element.createElement(
+        "label",
+        {
+          htmlFor: "wa-numberCard",
+        },
+        "Choisissez le nombre de cartes \xE0 afficher"
+      ),
+      /*#__PURE__*/ wp.element.createElement("input", {
+        type: "number",
+        id: "wa-numberCard",
+        onChange: updateContent,
+        value: props.attributes.content,
+      })
     );
   },
 

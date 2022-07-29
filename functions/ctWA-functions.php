@@ -69,6 +69,7 @@ function ctWA_addAdminLink(){
  */
 function read_DB(){
     global $wpdb;
+
     $request = 'SELECT * FROM '. $wpdb->prefix . 'wa_tarot_cards';
     $data= $wpdb->get_results(
         $wpdb->prepare($request)
@@ -137,16 +138,29 @@ function update_DB(WP_REST_Request $request){
         }
 }
 
-
+/**
+ * supprime une carte de la base de données
+ *
+ * @param WP_REST_Request $request
+ * @return void
+ */
 function delete_DB(WP_REST_Request $request){
     $params= $request->get_params();
     global $wpdb;
-    if($wpdb->delete(TAROT_DB_NAME, ['id' => $params['id']], ['%d'])){
-        echo 'la carte a bien été supprimée';   
-    } else {
-        echo 'erreur : la carte n\'a  pas pu être supprimée'; 
-    }
+    
+    $request = 'SELECT * FROM '. TAROT_DB_NAME;
+    $data= $wpdb->get_results(
+        $wpdb->prepare($request, ['id' => $params['id']])
+    );
+    unlink(__DIR__.'/../assets/uploads/'.$data[0]->imgDB);
+        if($wpdb->delete(TAROT_DB_NAME, ['id' => $params['id']], ['%d'])){
+            echo 'la carte a bien été supprimée';   
+        } else {
+            echo 'erreur : la carte n\'a  pas pu être supprimée'; 
+        }
+    
 }
+
 /**
  * ajoute une route perso à l'API rest de WP pour la lecture des données
  *

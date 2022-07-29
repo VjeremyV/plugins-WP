@@ -14,12 +14,12 @@
   const update = document.getElementById("updateButton"); //boutton soumission formulaire de mise à jour
   const upCardImg = document.getElementById("upCardImg"); //input image formulaire de mise à jour
   ////////////////////////////////éléments du form delete
-  const deleteContainer = document.getElementById("delete-container");//conteneur du formulaire de suppression
-  const cardsSelectDelete = document.getElementById("cardsSelectDelete");//input select formulaire de suppression
-  const cardTitleWaDelete = document.querySelector(".cardTitleWaDelete");//conteneur du titre formulaire de suppression
-  const cardImgWADelete = document.querySelector(".cardImgWADelete");//conteneur de l'image formulaire de suppression
-  const cardDescriptionWADelete = document.querySelector(".cardDescriptionWADelete");// conteneur de la description formulaire de suppression
-
+  const deleteContainer = document.getElementById("delete-container"); //conteneur du formulaire de suppression
+  const cardsSelectDelete = document.getElementById("cardsSelectDelete"); //input select formulaire de suppression
+  const cardTitleWaDelete = document.querySelector(".cardTitleWaDelete"); //conteneur du titre formulaire de suppression
+  const cardImgWADelete = document.querySelector(".cardImgWADelete"); //conteneur de l'image formulaire de suppression
+  const cardDescriptionWADelete = document.querySelector(".cardDescriptionWADelete"); // conteneur de la description formulaire de suppression
+  const deleteButton = document.getElementById("deleteButton");
   ////////////////////////////////éléments généraux////////////////////////////////////////
   let buttons = document.querySelectorAll(".boutons"); //boutons radios pour switch de formulaires
   let message = document.querySelector(".flash-messages");
@@ -71,6 +71,7 @@
           message.innerHTML =
             "<p class = \"alert alert-danger\" >Une erreur est survenu lors de l'upload de l'image </p>";
         }
+        cleanInputs([newCardName, newCardDescription, newCardImg])
         return data;
       });
   }
@@ -139,13 +140,14 @@
    */
   function createSelect(select, options) {
     let optionsInput = options
-      .map(
-        (option) =>
-          `
-          <option value='${option.id}' id='${option.id}'>${option.nom}</option>
-          `
-      )
-      .join("");
+        .map(
+          (option) =>
+            `
+            <option value='${option.id}' id='${option.id}'>${option.nom}</option>
+            `
+        )
+        .join("");
+    
     select.innerHTML = optionsInput;
   }
 
@@ -159,18 +161,38 @@
         return res.json();
       })
       .then((data) => {
-        inputsOptions = Array.from(data);
-        cardImgWAUpdate.innerHTML = `<img class='imgCardWA'src="${document.location.origin}/wp-content/plugins/cartes-tarot-WA/assets/uploads/${inputsOptions[0].imgDB}">`;
-        createSelect(cardsSelectUpdate, inputsOptions);
-        createSelect(cardsSelectDelete, inputsOptions);
-        cardsSelectDelete.value = inputsOptions[0].id;
-        upCardNom.value = inputsOptions[0].nom;
-        upCardDescription.value = inputsOptions[0].description;
-        cardTitleWaDelete.innerHTML = `<h3>${inputsOptions[0].nom}</h3>`;
-        cardImgWADelete.innerHTML = `<img class='imgCardWA'src="${document.location.origin}/wp-content/plugins/cartes-tarot-WA/assets/uploads/${inputsOptions[0].imgDB}">`;
-        cardDescriptionWADelete.innerHTML = `<p>${inputsOptions[0].description}</p>`;
+        if(data.length > 0){
+          inputsOptions = Array.from(data);
+          cardImgWAUpdate.innerHTML = `<img class='imgCardWA'src="${document.location.origin}/wp-content/plugins/cartes-tarot-WA/assets/uploads/${inputsOptions[0].imgDB}">`;
+          cardsSelectDelete.value = inputsOptions[0].id;
+          upCardNom.value = inputsOptions[0].nom;
+          upCardDescription.value = inputsOptions[0].description;
+          cardTitleWaDelete.innerHTML = `<h3>${inputsOptions[0].nom}</h3>`;
+          cardImgWADelete.innerHTML = `<img class='imgCardWA'src="${document.location.origin}/wp-content/plugins/cartes-tarot-WA/assets/uploads/${inputsOptions[0].imgDB}">`;
+          cardDescriptionWADelete.innerHTML = `<p>${inputsOptions[0].description}</p>`;
+          createSelect(cardsSelectUpdate, inputsOptions);
+          createSelect(cardsSelectDelete, inputsOptions);
+        } else {
+          cardsSelectUpdate.innerHTML = '<option value="">--En attente des données--</option>';
+          cardsSelectDelete.innerHTML = '<option value="">--En attente des données--</option>';
+          cleanElements([cardImgWAUpdate, cardTitleWaDelete, cardImgWADelete, cardDescriptionWADelete]);
+          cleanInputs([cardsSelectDelete, upCardNom, upCardDescription]);
+        }
       });
   }
+
+
+  function cleanElements(elementArray){
+    elementArray.forEach((element) => {
+      element.innerHTML = '';
+    })
+  }
+  function cleanInputs(elementArray){
+    elementArray.forEach((element) => {
+      element.value = '';
+    })
+  }
+
 
   /**
    * vide le contenu des messages
@@ -224,7 +246,8 @@
       "POST",
       "La carte a bien été ajoutée",
       "Une erreur est survenu lors de l'ajout de la carte"
-    );
+    )
+
   });
 
   /**
@@ -233,8 +256,6 @@
   update.addEventListener("click", function (e) {
     e.preventDefault();
     if (upCardImg.files[0]) {
-      console.log(upCardNom.value);
-      console.log(upCardDescription.value);
       addCard(
         upCardNom,
         upCardDescription,
@@ -270,6 +291,27 @@
       );
     }
   });
+
+
+/**
+ * au click sur le bouton de suppression d'une carte
+ */
+  deleteButton.addEventListener('click', (e)=> {
+    e.preventDefault();
+    let path = document.location.origin + "/wp-json/wa_tarot/v1/delete/"+cardsSelectDelete.value;
+    fetch(path, {method : "delete"}).then((res) =>{
+      if(res.status === 200){
+        message.innerHTML =
+          '<p class="alert alert-success">La carte a bien été supprimée</p>';
+        clearMessage();
+        loadOptionsInput();
+      } else {
+        message.innerHTML =
+          '<p class="alert alert-success">Une erreur est survenue lors de la suppression de la carte</p>';
+        clearMessage();
+      }
+    })
+  })
 
   /**
    * au changement de valeur de l'input select de mise à jour
