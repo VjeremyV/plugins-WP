@@ -19,10 +19,10 @@ function ctWA_addAdminLink(){
      *
      * @return void
      */
-    function ctWA_addJsEditor(){
+    function ctWA_addAssetsEditor(){
         wp_enqueue_script('ctWA-tarot-js', trailingslashit(TAROT_PLUG_DIR).'assets/js/ctWA-plug.js',
-        array('wp-blocks', 'wp-i18n', 'wp-editor')
-        , true);
+        array('wp-blocks', 'wp-i18n', 'wp-editor'), true);
+        wp_enqueue_style('ctWA-block-editor-css', trailingslashit(TAROT_PLUG_DIR).'assets/css/ctWA-block-editor.css' , false, '1.0', 'all');
     }
 
     /**
