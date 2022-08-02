@@ -1,32 +1,35 @@
 .cards{
+  padding: 0 50px;
+}
+
+.cardsT{
     bottom: 0;
     display: flex;
     height: 150px;
-    padding: 0 50px;
     justify-content: center;
     margin: auto;
+    width: 100%;
 }
 
-.card{
-    height: 150px;
+.cardT{
+  height: 150px;
+  width: 100px;
     margin: 0 -25px;
     position: relative;
-    width: 100px;
+    border: none;
 }
 
 
-
-.card-face{
+.cardT-back{
     bottom: 0;
     left: 0;
     pointer-events: none;
     position: absolute;
     right: 0;
     top: 0;
- 
 }
 
-.card-face:after{
+.cardT-back:after{
     content:"";
     animation:none;
     background:#fff;
@@ -37,206 +40,39 @@
     right:0;
     top:0;
   }
+  
 
- 
-  .card:nth-child(1) .card-face{
+  .cardT .cardT-back{
     background: linear-gradient(-135deg, #ff9999, #da0b0b);
-      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.15), inset 0 0 0 2px rgba(255, 153, 153, 0.75);
-      transform: translateY(45px) rotate(-45deg);
+    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.15), inset 0 0 0 2px rgba(255, 153, 153, 0.75);
   }
-  
-  .card:nth-child(1):hover .card-face{
+
+  .cardT:hover .cardT-back{
     box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 0 2px rgba(255,153,153,0.75);
-    transform:translateY(-100px) rotate(0deg) scale(2);
-    transition-duration: 0ms;
-    z-index:5;
+    transform:translateY(50px) scale(2);
+    transition-duration: 0.2s;
+    z-index: 5;
   }
-  .card:nth-child(1):hover .card-face:after{
+  .cardT:hover .cardT-back:after{
     animation:fade 250ms ease-out forwards;
   }
-  .card:nth-child(1):hover:after{
+  .cardT:hover:after{
     top:-175px;
   }
   
-  
-  .card:nth-child(2) .card-face{
-    background: linear-gradient(-135deg, #ff99d6, #da0b87);
-      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.15), inset 0 0 0 2px rgba(255, 153, 214, 0.75);
-      transform: translateY(35px) rotate(-21.875deg);
+  @media screen and (max-width: 1250px){
+    .cardT{
+      width: 85px;
+      margin: 0 -25px;
+    }
   }
-
-  .card:nth-child(2):hover .card-face{
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 0 2px rgba(255,153,214,0.75);
-    transform:translateY(-100px) rotate(0deg) scale(2);
-    transition-duration: 0ms;
-    z-index:5;
+  @media screen and (max-width: 854px){
+    .cardT{
+      width: 200px;
+      height: 300px;
+      margin: 0 -101px;
+    }
   }
-  .card:nth-child(2):hover .card-face:after{
-    animation:fade 250ms ease-out forwards;
-  }
-  .card:nth-child(2):hover:after{
-    top:-175px;
-  }
-  
-  
-  
-  .card:nth-child(3) .card-face{
-    background: linear-gradient(-135deg, #eb99ff, #b10bda);
-      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.15), inset 0 0 0 2px rgba(255, 153, 255, 0.75);
-      transform: translateY(25px) rotate(-16.625deg);
-  }
-
-  .card:nth-child(3):hover .card-face{
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 0 2px rgba(255,153,255,0.75);
-    transform:translateY(-100px) rotate(0deg) scale(2);
-    transition-duration: 0ms;
-    z-index:5;
-  }
-  .card:nth-child(3):hover .card-face:after{
-    animation:fade 250ms ease-out forwards;
-  }
-  .card:nth-child(3):hover:after{
-    top:-175px;
-  }
-  
-  .card:nth-child(4) .card-face{
-    background: linear-gradient(-135deg, #ad99ff, #350bda);
-      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.15), inset 0 0 0 2px rgba(173, 153, 255, 0.75);
-      transform: translateY(15px) rotate(-9.375deg);
-  }
-
-  .card:nth-child(4):hover .card-face{
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 0 2px rgba(173,153,255,0.75);
-    -wewbkit-transform:translateY(-100px) rotate(0deg) scale(2);
-    transform:translateY(-100px) rotate(0deg) scale(2);
-    transition-duration: 0ms;
-    z-index:5;
-  }
-  .card:nth-child(4):hover .card-face:after{
-    animation:fade 250ms ease-out forwards;
-  }
-  .card:nth-child(4):hover:after{
-    top:-175px;
-  }
-  
-  
-  .card:nth-child(5) .card-face{
-    background: linear-gradient(-135deg, #99c2ff, #0b5eda);
-      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.15), inset 0 0 0 2px rgba(153, 194, 255, 0.75);
-      transform: translateY(5px) rotate(-3.125deg);
-  }
-
-  .card:nth-child(5):hover .card-face{
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 0 2px rgba(153,194,255,0.75);
-    transform:translateY(-100px) rotate(0deg) scale(2);
-    transition-duration: 0ms;
-    z-index:5;
-  }
-  .card:nth-child(5):hover .card-face:after{
-    animation:fade 250ms ease-out forwards;
-  }
-  .card:nth-child(5):hover:after{
-    top:-175px;
-  }
-  
-  .card:nth-child(6) .card-face{
-    background: linear-gradient(-135deg, #99ffff, #0bdada);
-      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.15), inset 0 0 0 2px rgba(153, 255, 255, 0.75);
-      transform: translateY(45px) rotate(45deg);
-  }
-
-  .card:nth-child(6):hover .card-face{
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 0 2px rgba(153,255,255,0.75);
-    transform:translateY(-100px) rotate(0deg) scale(2);
-    transition-duration: 0ms;
-    z-index:5;
-  }
-  .card:nth-child(6):hover .card-face:after{
-    animation:fade 250ms ease-out forwards;
-  }
-  .card:nth-child(6):hover:after{
-    top:-175px;
-  }
-  
-  
-  .card:nth-child(7) .card-face{
-    background: linear-gradient(-135deg, #99ffc2, #0bda5e);
-      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.15), inset 0 0 0 2px rgba(153, 255, 194, 0.75);
-      transform: translateY(15px) rotate(9.375deg);
-  }
-
-  .card:nth-child(7):hover .card-face{
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 0 2px rgba(153,255,194,0.75);
-    transform:translateY(-100px) rotate(0deg) scale(2);
-    transition-duration: 0ms;
-    z-index:5;
-  }
-  .card:nth-child(7):hover .card-face:after{
-    animation:fade 250ms ease-out forwards;
-  }
-  .card:nth-child(7):hover:after{
-    top:-175px;
-  }
-  
-  
-  .card:nth-child(8) .card-face{
-    background: linear-gradient(-135deg, #adff99, #35da0b);
-      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.15), inset 0 0 0 2px rgba(173, 255, 153, 0.75);
-      transform: translateY(25px) rotate(15.625deg);
-  }
-
-  .card:nth-child(8):hover .card-face{
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 0 2px rgba(173,255,153,0.75);
-    transform:translateY(-100px) rotate(0deg) scale(2);
-    transition-duration: 0ms;
-    z-index:5;
-  }
-  .card:nth-child(8):hover .card-face:after{
-    animation:fade 250ms ease-out forwards;
-  }
-  .card:nth-child(8):hover:after{
-    top:-175px;
-  }
-  
-  .card:nth-child(9) .card-face{
-    background: linear-gradient(-135deg, #ebff99, #b1da0b);
-      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.15), inset 0 0 0 2px rgba(255, 255, 153, 0.75);
-      transform: translateY(35px) rotate(21.875deg);
-  }
-
-  .card:nth-child(9):hover .card-face{
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 0 2px rgba(255,255,153,0.75);
-    transform:translateY(-100px) rotate(0deg) scale(2);
-    transition-duration: 0ms;
-    z-index:5;
-  }
-  .card:nth-child(9):hover .card-face:after{
-    animation:fade 250ms ease-out forwards;
-  }
-  .card:nth-child(9):hover:after{
-    top:-175px;
-  }
-  
-  
-  .card:nth-child(10) .card-face{
-    background: linear-gradient(-135deg, #ffd699, #da870b);
-      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.15), inset 0 0 0 2px rgba(255, 214, 153, 0.75);
-      transform: translateY(45px) rotate(28.125deg);
-  }
-
-  .card:nth-child(10):hover .card-face{
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 0 2px rgba(255,214,153,0.75);
-    transform:translateY(-100px) rotate(0deg) scale(2);
-    transition-duration: 0ms;
-    z-index:5;
-  }
-  .card:nth-child(10):hover .card-face:after{
-    animation:fade 250ms ease-out forwards;
-  }
-  .card:nth-child(10):hover:after{
-    top:-175px;
-  }
-  
   
     @keyframes fade{
     0%{
@@ -248,3 +84,4 @@
       transform:scale(1.15);
     }
   }
+  

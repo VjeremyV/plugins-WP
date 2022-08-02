@@ -110,9 +110,9 @@
         }, wp.element.createElement("a", {
           href: "#",
           class: "closebtn"
-        }, "\xD7"), wp.element.createElement("h2", null, "Ent\xEAte de modale")), wp.element.createElement("div", {
+        }, "\xD7"), wp.element.createElement("h2", null, "Entête de modale")), wp.element.createElement("div", {
           class: "container"
-        }, wp.element.createElement("p", null, "Texte dans la fen\xEAtre modale.")), wp.element.createElement("footer", {
+        }, wp.element.createElement("p", null, "Texte dans la fenêtre modale.")), wp.element.createElement("footer", {
           class: "container"
         }, wp.element.createElement("p", null, "Pied de page de modale")))))
 
@@ -128,43 +128,98 @@
       return wp.element.createElement("div", {
         class: "cards"
       },
-      //  wp.element.createElement("div", {
-      //   class: "card"
-      // }, wp.element.createElement("div", {
-      //   class: "card-face"
-      // }, wp.element.createElement("div", {
-      //   class: "card-label"
-      // }, "1"))), wp.element.createElement("div", {
-      //   class: "card"
-      // }, wp.element.createElement("div", {
-      //   class: "card-face"
-      // }, wp.element.createElement("div", {
-      //   class: "card-label"
-      // }, "2"))), wp.element.createElement("div", {
-      //   class: "card"
-      // }, wp.element.createElement("div", {
-      //   class: "card-face"
-      // }, wp.element.createElement("div", {
-      //   class: "card-label"
-      // }, "3"))), wp.element.createElement("div", {
-      //   class: "card"
-      // }, wp.element.createElement("div", {
-      //   class: "card-face"
-      // }, wp.element.createElement("div", {
-      //   class: "card-label"
-      // }, "4"))), wp.element.createElement("div", {
-      //   class: "card"
-      // }, wp.element.createElement("div", {
-      //   class: "card-face"
-      // }, wp.element.createElement("div", {
-      //   class: "card-label"
-      // }, "5"))), wp.element.createElement("div", {
-      //   class: "card"
-      // }, wp.element.createElement("div", {
-      //   class: "card-face"
-      // }, wp.element.createElement("div", {
-      //   class: "card-label"
-      // }, "6")))
+
+wp.element.createElement("div", {
+  class: "cardsT"
+}, wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})), wp.element.createElement("div", {
+  class: "cardT"
+}, wp.element.createElement("div", {
+  class: "cardT-back"
+})))
       );
     },
   });
