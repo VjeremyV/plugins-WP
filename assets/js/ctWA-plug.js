@@ -101,32 +101,71 @@
         wp.element.createElement("div", {
           id: "id01",
           class: "modal"
-        }, /*#__PURE__*/wp.element.createElement("div", {
+        }, wp.element.createElement("div", {
           class: "modal-dialog"
-        }, /*#__PURE__*/wp.element.createElement("div", {
+        }, wp.element.createElement("div", {
           class: "modal-content"
-        }, /*#__PURE__*/wp.element.createElement("header", {
+        }, wp.element.createElement("header", {
           class: "container"
-        }, /*#__PURE__*/wp.element.createElement("a", {
+        }, wp.element.createElement("a", {
           href: "#",
           class: "closebtn"
-        }, "\xD7"), /*#__PURE__*/wp.element.createElement("h2", null, "Ent\xEAte de modale")), /*#__PURE__*/wp.element.createElement("div", {
+        }, "\xD7"), wp.element.createElement("h2", null, "Ent\xEAte de modale")), wp.element.createElement("div", {
           class: "container"
-        }, /*#__PURE__*/wp.element.createElement("p", null, "Texte dans la fen\xEAtre modale.")), /*#__PURE__*/wp.element.createElement("footer", {
+        }, wp.element.createElement("p", null, "Texte dans la fen\xEAtre modale.")), wp.element.createElement("footer", {
           class: "container"
-        }, /*#__PURE__*/wp.element.createElement("p", null, "Pied de page de modale")))))
+        }, wp.element.createElement("p", null, "Pied de page de modale")))))
 
 
       );
     },
   
     save: function (props) {
-      // fetch("https://api.example.com/items")
-  
+      // return wp.element.createElement("div", {
+      //   class: "tarot-card-container",
+      //   style: "border:1px solid black;width:"+props.attributes.blockWidth+"px; height:"+props.attributes.blockHeight+"px",
+      // });
       return wp.element.createElement("div", {
-        class: "tarot-card-container",
-        style: "border:1px solid black;width:"+props.attributes.blockWidth+"px; height:"+props.attributes.blockHeight+"px",
-      });
+        class: "cards"
+      },
+      //  wp.element.createElement("div", {
+      //   class: "card"
+      // }, wp.element.createElement("div", {
+      //   class: "card-face"
+      // }, wp.element.createElement("div", {
+      //   class: "card-label"
+      // }, "1"))), wp.element.createElement("div", {
+      //   class: "card"
+      // }, wp.element.createElement("div", {
+      //   class: "card-face"
+      // }, wp.element.createElement("div", {
+      //   class: "card-label"
+      // }, "2"))), wp.element.createElement("div", {
+      //   class: "card"
+      // }, wp.element.createElement("div", {
+      //   class: "card-face"
+      // }, wp.element.createElement("div", {
+      //   class: "card-label"
+      // }, "3"))), wp.element.createElement("div", {
+      //   class: "card"
+      // }, wp.element.createElement("div", {
+      //   class: "card-face"
+      // }, wp.element.createElement("div", {
+      //   class: "card-label"
+      // }, "4"))), wp.element.createElement("div", {
+      //   class: "card"
+      // }, wp.element.createElement("div", {
+      //   class: "card-face"
+      // }, wp.element.createElement("div", {
+      //   class: "card-label"
+      // }, "5"))), wp.element.createElement("div", {
+      //   class: "card"
+      // }, wp.element.createElement("div", {
+      //   class: "card-face"
+      // }, wp.element.createElement("div", {
+      //   class: "card-label"
+      // }, "6")))
+      );
     },
   });
 })()
