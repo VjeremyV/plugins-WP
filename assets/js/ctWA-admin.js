@@ -18,8 +18,14 @@
   const cardsSelectDelete = document.getElementById("cardsSelectDelete"); //input select formulaire de suppression
   const cardTitleWaDelete = document.querySelector(".cardTitleWaDelete"); //conteneur du titre formulaire de suppression
   const cardImgWADelete = document.querySelector(".cardImgWADelete"); //conteneur de l'image formulaire de suppression
-  const cardDescriptionWADelete = document.querySelector(".cardDescriptionWADelete"); // conteneur de la description formulaire de suppression
+  const cardDescriptionWADelete = document.querySelector(
+    ".cardDescriptionWADelete"
+  ); // conteneur de la description formulaire de suppression
   const deleteButton = document.getElementById("deleteButton");
+  //////////////////////////////////////inputs dos de la carte///////////////////////////
+  let backImgContainer = document.querySelector(".upload-back-img");
+  let uploadBackButton = document.getElementById("upload-back-button");
+  let uploadBackImg = document.getElementById("upload-back-img");
   ////////////////////////////////éléments généraux////////////////////////////////////////
   let buttons = document.querySelectorAll(".boutons"); //boutons radios pour switch de formulaires
   let message = document.querySelector(".flash-messages");
@@ -71,7 +77,7 @@
           message.innerHTML =
             "<p class = \"alert alert-danger\" >Une erreur est survenu lors de l'upload de l'image </p>";
         }
-        cleanInputs([newCardName, newCardDescription, newCardImg])
+        cleanInputs([newCardName, newCardDescription, newCardImg]);
         return data;
       });
   }
@@ -140,14 +146,14 @@
    */
   function createSelect(select, options) {
     let optionsInput = options
-        .map(
-          (option) =>
-            `
+      .map(
+        (option) =>
+          `
             <option value='${option.id}' id='${option.id}'>${option.nom}</option>
             `
-        )
-        .join("");
-    
+      )
+      .join("");
+
     select.innerHTML = optionsInput;
   }
 
@@ -161,7 +167,7 @@
         return res.json();
       })
       .then((data) => {
-        if(data.length > 0){
+        if (data.length > 0) {
           inputsOptions = Array.from(data);
           cardImgWAUpdate.innerHTML = `<img class='imgCardWA'src="${document.location.origin}/wp-content/plugins/cartes-tarot-WA/assets/uploads/${inputsOptions[0].imgDB}">`;
           cardsSelectDelete.value = inputsOptions[0].id;
@@ -173,26 +179,31 @@
           createSelect(cardsSelectUpdate, inputsOptions);
           createSelect(cardsSelectDelete, inputsOptions);
         } else {
-          cardsSelectUpdate.innerHTML = '<option value="">--En attente des données--</option>';
-          cardsSelectDelete.innerHTML = '<option value="">--En attente des données--</option>';
-          cleanElements([cardImgWAUpdate, cardTitleWaDelete, cardImgWADelete, cardDescriptionWADelete]);
+          cardsSelectUpdate.innerHTML =
+            '<option value="">--En attente des données--</option>';
+          cardsSelectDelete.innerHTML =
+            '<option value="">--En attente des données--</option>';
+          cleanElements([
+            cardImgWAUpdate,
+            cardTitleWaDelete,
+            cardImgWADelete,
+            cardDescriptionWADelete,
+          ]);
           cleanInputs([cardsSelectDelete, upCardNom, upCardDescription]);
         }
       });
   }
 
-
-  function cleanElements(elementArray){
+  function cleanElements(elementArray) {
     elementArray.forEach((element) => {
-      element.innerHTML = '';
-    })
+      element.innerHTML = "";
+    });
   }
-  function cleanInputs(elementArray){
+  function cleanInputs(elementArray) {
     elementArray.forEach((element) => {
-      element.value = '';
-    })
+      element.value = "";
+    });
   }
-
 
   /**
    * vide le contenu des messages
@@ -246,8 +257,7 @@
       "POST",
       "La carte a bien été ajoutée",
       "Une erreur est survenu lors de l'ajout de la carte"
-    )
-
+    );
   });
 
   /**
@@ -292,15 +302,17 @@
     }
   });
 
-
-/**
- * au click sur le bouton de suppression d'une carte
- */
-  deleteButton.addEventListener('click', (e)=> {
+  /**
+   * au click sur le bouton de suppression d'une carte
+   */
+  deleteButton.addEventListener("click", (e) => {
     e.preventDefault();
-    let path = document.location.origin + "/wp-json/wa_tarot/v1/delete/"+cardsSelectDelete.value;
-    fetch(path, {method : "delete"}).then((res) =>{
-      if(res.status === 200){
+    let path =
+      document.location.origin +
+      "/wp-json/wa_tarot/v1/delete/" +
+      cardsSelectDelete.value;
+    fetch(path, { method: "delete" }).then((res) => {
+      if (res.status === 200) {
         message.innerHTML =
           '<p class="alert alert-success">La carte a bien été supprimée</p>';
         clearMessage();
@@ -310,8 +322,8 @@
           '<p class="alert alert-success">Une erreur est survenue lors de la suppression de la carte</p>';
         clearMessage();
       }
-    })
-  })
+    });
+  });
 
   /**
    * au changement de valeur de l'input select de mise à jour
@@ -338,5 +350,61 @@
       }
     });
   });
+
+  /**
+   * verifie sur un fichier existe
+   * @param {} urlToFile
+   * @returns
+   */
+  function doesFileExist(urlToFile) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("HEAD", urlToFile, false);
+    xhr.send();
+
+    return xhr.status !== 404;
+  }
+
+  /**
+   * affice l'image choisi en tant que dos de carte
+   */
+  function showBack() {
+    let path = `${document.location.origin}/wp-content/plugins/cartes-tarot-WA/assets/uploads/`;
+    let extensions = ["jpg", "jpeg", "png", "wepb", "PNG"];
+    extensions.forEach((ext) => {
+      if (doesFileExist(path + "back." + ext)) {
+        backImgContainer.innerHTML = `
+      <img src = '${path}back.${ext}' widht='200px' height='300px'> 
+      `;
+      }
+    });
+  }
+
+  uploadBackButton.addEventListener("click", () => {
+    if(uploadBackImg.files[0]){
+      let formData = new FormData();
+      formData.append("back", uploadBackImg.files[0]);
+      fetch(
+        document.location.origin +
+          "/wp-content/plugins/cartes-tarot-WA/functions/ctWA-upload.php",
+        {
+          method: "POST",
+          body: formData,
+        }
+      ).then((res)=> res.text()).then((data) => {
+        if (data !== "Failure") {
+          console.log(data);
+          message.innerHTML =
+          '<p class="alert alert-success">Le dos de carte a bien été remplacé</p>';
+          showBack()
+        clearMessage();
+        }
+      });
+    } else {
+      message.innerHTML =
+      '<p class="alert alert-danger">Une erreur s\'est produite</p>';
+    }
+  });
+
+  showBack();
   loadOptionsInput();
 })();

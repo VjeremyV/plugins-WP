@@ -92,3 +92,16 @@ wp_enqueue_script(
 </div>
 
 <div class='flash-messages text-center'></div>
+
+<div id='upload-back' class='ctWA-containers'>
+    <h2>Changer le dos de la carte</h2>
+    <form id='upload-back-form' class="form-group ctWA-forms">
+    <input class="form-control" type="file" name="upload-back-img" id="upload-back-img">
+      <button id='upload-back-button' type="button" class="btn btn-primary my-3">changer</button>
+    </form>
+    <div class="d-flex justify-content-around align-items-center">
+   <div class="d-flex flex-column justify-content-center align-items-center">
+       <div class='upload-back-img'></div>
+   </div>
+  </div>
+</div>
