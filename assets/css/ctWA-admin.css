@@ -30,3 +30,17 @@ align-items: center;
     width:244px;
     height: 444px;;
 }
+
+.wrap, #upload-back{
+    width: 70%;
+    margin: auto;
+    border: 1px solid #00000073;
+    border-radius: 10px;
+    margin-top: 50px;
+    padding: 50px;
+}
+
+.wrap h1{
+font-size: 43px;
+margin-bottom: 20px;
+}

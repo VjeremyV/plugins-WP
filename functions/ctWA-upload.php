@@ -37,7 +37,7 @@ if(isset($_FILES['back'])){
 
   if(in_array($fileExtension, $extensions)){
      /* Save the uploaded file to the local filesystem */
-     if (move_uploaded_file($_FILES['back']['tmp_name'], '../assets/uploads/back.'.$fileExtension) ) { 
+     if (move_uploaded_file($_FILES['back']['tmp_name'], '../assets/uploads/back.jpg') ) { 
     } else { 
       echo 'Failure'; 
     }
