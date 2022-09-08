@@ -36,10 +36,10 @@ wp_enqueue_script(
       <label for="newCardNom" class="form-label">Nom de la carte</label>
       <input class="form-control" type="text" name="newCardNom" id="newCardNom">
 
-      <label class="form-label" for="newCardDescription">Description de la carte</label>
+      <label class="form-label" for="newCardDescription">Description de la carte<span>(nombre de caractères max optimal : entre 300 et 400)</label>
       <textarea class="form-control" name="newCardDescription" id="newCardDescription"></textarea>
 
-      <label class="form-label" for="newCardImg">Image de la carte</label>
+      <label class="form-label d-flex flex-column" for="newCardImg">Image de la carte <span>(lors de l'affichage l'image sera en 200 x 300px, si celle-ci vous chargez une image plus grande elle sera centrée et mise à l'échelle)</span></label>
       <input class="form-control" type="file" name="newCardImg" id="newCardImg">
 
       <button id='createButton' type="button" class="btn btn-primary my-3">créer</button>
@@ -91,7 +91,7 @@ wp_enqueue_script(
   </div>
 </div>
 
-<div class='flash-messages text-center'></div>
+<div class='flash-messages text-center mt-3'></div>
 
 <div id='upload-back' class='ctWA-containers'>
     <h2>Changer le dos de la carte</h2>

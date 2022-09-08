@@ -51,7 +51,7 @@ function ctWA_addAdminLink(){
     $request = "CREATE TABLE IF NOT EXISTS ". $wpdb->prefix . 'wa_tarot_cards'." (
     id int(255) NOT NULL AUTO_INCREMENT,
     nom varchar(255) NOT NULL,
-    description varchar(255) NULL,
+    description text NULL,
     img varchar(255) NOT NULL,
     imgDB varchar(255) NOT NULL,
     PRIMARY KEY  (id)
@@ -86,8 +86,8 @@ function read_DB(){
 function write_DB(WP_REST_Request $request){
     $params= $request->get_params();
     global $wpdb;
-    $nom = htmlentities($params['nom']);
-    $description = htmlentities($params['description']);
+    $nom = htmlspecialchars($params['nom']);
+    $description = htmlspecialchars($params['description']);
     $image = htmlentities($params['img']);
     $imageDb = htmlentities($params['imgDB']);
 
@@ -121,8 +121,8 @@ function write_DB(WP_REST_Request $request){
 function update_DB(WP_REST_Request $request){
     $params= $request->get_params();
     global $wpdb;
-    $nom = htmlentities($params['nom']);
-    $description = htmlentities($params['description']);
+    $nom = htmlspecialchars($params['nom']);
+    $description = htmlspecialchars($params['description']);
     $image = htmlentities($params['img']);
     $imageDb = htmlentities($params['imgDB']);
     if($wpdb->update(TAROT_DB_NAME, [

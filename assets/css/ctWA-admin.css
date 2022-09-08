@@ -26,9 +26,12 @@ align-items: center;
     max-width: 200px;
     margin: auto;
 }
-.imgCardWA{
+.imgCardWA, .upload-back-img img{
+    object-fit: cover;
     width:244px;
-    height: 444px;;
+    height: 444px;
+    border-radius: 5px;
+
 }
 
 .wrap, #upload-back{
