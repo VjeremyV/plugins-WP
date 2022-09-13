@@ -19,6 +19,10 @@
     let count = 1;
     let currentdraw = [];
     let miniaturesImgContainer = document.querySelectorAll('.minImgCardResultContainer');
+    let resetBtn = document.getElementById('resetTarotBtn');
+
+
+  
 /**
  * renvoit l'id d'une carte différent à chaque tirage jusqu'à arriver au bout du paquet
  * @param {number} numberOfCards 
@@ -46,6 +50,7 @@
 
       } 
     }
+    
 
     /**
      * affiche les miniatures des img des cartes tirées
@@ -62,19 +67,59 @@
       checkResetGame();
     }
 
+    resetBtn.addEventListener('click', ()=> {
+      resetTarotGame()    
+    })
     /**
      * vérifie si il faut reinitialiser le jeu une fois toutes les cartes tirées
      */
     function checkResetGame(){
       if(count == 8 ){
-        console.log('reset ?');
+        resetBtn.style.opacity = "1";
+        resetBtn.style.pointerEvents = 'auto';
+        resetBtn.setAttribute('class', 'hoverbton');
       }
     }
 
     /**
+     * reinitialise le jeu
+     */
+    function resetTarotGame(){
+      resetCard = true;
+      hideBigCard();//on cache la grosse carte
+
+      //on efface toutes les petites cartes
+      miniaturesImgContainer.forEach((miniature)=> {
+        miniature.style.background = 'none';
+        miniature.style.border = '1px solid black';
+      })
+      //on efface les textes de resultat
+        let bigMiniContainer = document.getElementById('miniResumeCardsResultsContainer');
+        bigMiniContainer.innerHTML=``;
+
+      //on reinitialise le compteur et le tirage actuel
+      currentdraw = [];
+      count = 1;
+      cardsAlreadyGone = [];
+
+      //on remet les cartes dans le paquet
+      cards.forEach((card)=> {
+        card.style.pointerEvents = 'auto';
+        card.style.transform = "none";
+        card.style.opacity = "1";
+
+        //on cache le boutton de reset à nouveau
+        resetBtn.style.opacity = "0";
+        resetBtn.style.pointerEvents = 'none';
+        resetBtn.removeAttribute('class');
+
+      })
+    }
+    /**
      * cache la grosse carte de resultat
      */
     function hideBigCard(){
+      cardResultContainer.style.opacity = "0";
       cardResult.style.transform = "rotateY(0)";
       resetCard = false;
       cardResultTitle.innerText = "";
@@ -187,6 +232,5 @@
         });
       });
   };
-
 
 })();

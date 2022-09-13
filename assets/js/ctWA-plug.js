@@ -241,6 +241,10 @@
       }), wp.element.createElement("p", {
         class: "t-card-description"
       }))), wp.element.createElement("div", {
+        id: "resetTarotGame"
+      }, wp.element.createElement("button", {
+        id: "resetTarotBtn"
+      }, "Faire un nouveau tirage !")),wp.element.createElement("div", {
         id: "miniCardsResultsContainer"
       },wp.element.createElement("div", {
         class: "miniCardResultContainer"

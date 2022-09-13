@@ -19,6 +19,29 @@
 #miniCardsResultsContainer{
   margin-top: 15px;
 }
+
+#resetTarotGame{
+  text-align: center;
+}
+#resetTarotBtn{
+  transition: 1.5s ease;
+  opacity: 0;
+   pointer-events: none;
+  padding: 15px 30px;
+  font-family: 'Combo';
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 2rem;
+  color: #cf7282;
+  background: #ffd27f;
+  border-radius: 10px; 
+}
+.hoverbton:hover{
+  cursor: pointer;
+  color: #ffd27f !important;
+  background: #cf7282 !important;
+}
+
 .miniCardResultContainer{
   width: 13%;
   min-width: 100px;
@@ -47,6 +70,7 @@
     justify-content: center;
     margin: auto;
     width: 100%;
+    transition: 1.5s ease;
 }
 
 .cardT{
