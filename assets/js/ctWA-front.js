@@ -1,7 +1,8 @@
 (() => {
   onload = (event) => {
-    let path = document.location.origin + "/wp-json/wa_tarot/v1/read"; //le chemin vers l'api de lecture des cartes
-
+    
+    let container = document.querySelector('.cards');
+    if(container){
     //paquet de cartes
     let cards = document.querySelectorAll(".cardT"); //selection de toutes les cartes
     let cardsBack = document.querySelectorAll(".cardT-back"); // selection de tous les dos de carte
@@ -29,6 +30,7 @@
  * @returns 
  */
     function getNewRandomCard(numberOfCards, data){
+      console.log(data);
       let randomCard = Math.floor(Math.random() * numberOfCards);
       if(!cardsAlreadyGone.includes(randomCard)){
         cardsAlreadyGone.push(randomCard);
@@ -218,19 +220,28 @@
       })
     })
 
-    //on fetch l'api pour obtenir les resultats de la bdd
-    fetch(path)
-      .then((res) => {
-        return res.json();
+
+    let csvFile = document.location.origin + "/wp-content/plugins/cartes-tarot-WA/assets/cards.csv";
+    fetch(csvFile).then((res)=> {
+      return res.text();
+    }).then((data) => {
+      let lines = data.split('\n');
+      lines.pop();
+      let arrayData = lines.map((el) => {
+        let miniel = el.split(';');
+        return {id : String(miniel[0]), nom: miniel[1], description: miniel[2], img: miniel[3], imgDB: String(miniel[4])}
       })
-      .then((data) => {
-       let  cardsData = Array.from(data);
-        //si on a les données alors on pourra retourner la carte
-        cardResult.addEventListener("click", () => {
-          let numberOfCards = data.length;
-          getNewRandomCard(numberOfCards, cardsData);
-        });
-      });
+      let cardsData = Array.from(arrayData)
+ //si on a les données alors on pourra retourner la carte
+ cardResult.addEventListener("click", () => {
+  let numberOfCards = cardsData.length;
+  getNewRandomCard(numberOfCards, cardsData);
+});
+
+    })
+
+
   };
+}
 
 })();

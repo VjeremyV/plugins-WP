@@ -167,6 +167,7 @@
         return res.json();
       })
       .then((data) => {
+        console.log(typeof data);
         if (data.length > 0) {
           inputsOptions = Array.from(data);
           cardImgWAUpdate.innerHTML = `<img class='imgCardWA'src="${document.location.origin}/wp-content/plugins/cartes-tarot-WA/assets/uploads/${inputsOptions[0].imgDB}">`;
@@ -392,7 +393,6 @@
         }
       ).then((res)=> res.text()).then((data) => {
         if (data !== "Failure") {
-          console.log(data);
           message.innerHTML =
           '<p class="alert alert-success">Le dos de carte a bien été remplacé</p>';
           showBack()

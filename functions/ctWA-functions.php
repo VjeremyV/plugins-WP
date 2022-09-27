@@ -65,7 +65,7 @@ function ctWA_addAdminLink(){
 /**
  * récupère tous les éléments de la bdd
  *
- * @return void
+ * @return object
  */
 function read_DB(){
     global $wpdb;
@@ -75,6 +75,25 @@ function read_DB(){
         $wpdb->prepare($request)
     );
     return $data;
+}
+
+function save_Csv() {
+    $data = read_DB();
+    $csv_array = [];
+    foreach($data as $line){
+      foreach($line as $entity){
+          $clean_line[] = $entity;
+      }
+      $csv_array[]= $clean_line;
+      $clean_line = [];
+  }
+
+    $fp = fopen(__DIR__.'/../assets/cards.csv', 'w');
+    foreach($csv_array as $value ){
+        fputcsv($fp, $value, ";");
+    }
+    // fwrite($fp, "coucou"); va ecrire dans notre fichier csv $fp la string "coucou"
+    fclose($fp); //ferme le fichier
 }
 
 /**
@@ -103,7 +122,8 @@ function write_DB(WP_REST_Request $request){
            
         )
         )){
-         echo 'la carte a bien été ajoutée';   
+        echo 'la carte a bien été ajoutée';   
+         save_csv();
         } else {
             echo 'la carte n\'a pas pu être ajoutée';
         }
@@ -132,6 +152,7 @@ function update_DB(WP_REST_Request $request){
         'imgDB' => $imageDb]
     , ['id' => $params['id']])      
         ){
+        save_csv();
          echo 'la carte a bien été mise à jour';   
         } else {
             echo 'la carte n\'a pas pu être mise à jour';
@@ -154,6 +175,7 @@ function delete_DB(WP_REST_Request $request){
     );
     unlink(__DIR__.'/../assets/uploads/'.$data[0]->imgDB);
         if($wpdb->delete(TAROT_DB_NAME, ['id' => $params['id']], ['%d'])){
+            save_csv();
             echo 'la carte a bien été supprimée';   
         } else {
             echo 'erreur : la carte n\'a  pas pu être supprimée'; 
